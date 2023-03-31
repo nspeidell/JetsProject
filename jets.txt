@@ -1,0 +1,3 @@
+PassengerJet,Delta,10,20,30
+Fighter,F18 Hornet,100000000,10,25
+Cargo Jet,Airbus 380,5,10,15
