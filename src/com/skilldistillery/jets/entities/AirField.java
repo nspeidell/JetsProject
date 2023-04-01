@@ -7,33 +7,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AirField {
-	//populate the fleet from the file
-	
-	
-	
-	
-	//only the airfield talks directly to the jet parled, the application 
-	//has to go trhough the airfield to talk to the jets (oark the car)
-	    private List<Jet> fleet;
-	    String fileName = "jets.txt";
-	    public List<Jet> readFromFile(String fileName) {
-	    		List<Jet> jets = new ArrayList<>();
-	    		//read in the various jet types from the file,  
-	    		try ( BufferedReader bufIn = new BufferedReader(new FileReader(fileName)) ) {
-	    			  String ajet;
-	    			  while ((ajet = bufIn.readLine()) != null) {
-	    				  //as you read in a jet, create= (new jet) a jet.
-	    				 String[] jetDetails = ajet.split(",");
-	    				 // create the app. jet based on details
-	    				 //if the jet details in the first position happens to be a fighter then create a fighter jet
-	    			    System.out.println(ajet);
-	    			  }
-	    			}
-	    			catch (IOException e) {
-	    			  System.err.println(e);
-	    			}
-	    		// and add that specific jet type to your jet list
+	private List<Jet> fleet = new ArrayList<>();
 
-	    		return jets;
-	    }
+	// only the airfield talks directly to the jet parked, the application
+	// has to go through the airfield to talk to the jets (park the car)
+
+	// read in the various jet types from the file,
+	public List<Jet> readJets(String fileName) {
+		try (BufferedReader bufIn = new BufferedReader(new FileReader(fileName))) {
+			String ajet;
+			while ((ajet = bufIn.readLine()) != null) {
+				String[] jetDetails = ajet.split(",");
+				String jetType = jetDetails[0];
+				if (jetType.equals("PassengerJet")) {
+					String model = jetDetails[1];
+					double speed = Double.parseDouble(jetDetails[2]);
+					int range = Integer.parseInt(jetDetails[3]);
+					long price = Long.parseLong(jetDetails[4]);
+					Jet j = new PassengerJet(model, speed, range, price);
+					getFleet().add(j);
+				} else if (jetType.equals("PrivateJet")) {
+					String model = jetDetails[1];
+					double speed = Double.parseDouble(jetDetails[2]);
+					int range = Integer.parseInt(jetDetails[3]);
+					long price = Long.parseLong(jetDetails[4]);
+					Jet j = new PrivateJet(model, speed, range, price);
+					getFleet().add(j);
+				} else if (jetType.equals("CargoPlane")) {
+					String model = jetDetails[1];
+					double speed = Double.parseDouble(jetDetails[2]);
+					int range = Integer.parseInt(jetDetails[3]);
+					long price = Long.parseLong(jetDetails[4]);
+					Jet j = new CargoPlane(model, speed, range, price);
+					getFleet().add(j);
+				} else if (jetType.equals("Fighter")) {
+					String model = jetDetails[1];
+					double speed = Double.parseDouble(jetDetails[2]);
+					int range = Integer.parseInt(jetDetails[3]);
+					long price = Long.parseLong(jetDetails[4]);
+					Jet j = new FighterJet(model, speed, range, price);
+					getFleet().add(j);
+				} else if (jetType.equals("StealthJet")) {
+					String model = jetDetails[1];
+					double speed = Double.parseDouble(jetDetails[2]);
+					int range = Integer.parseInt(jetDetails[3]);
+					long price = Long.parseLong(jetDetails[4]);
+					Jet j = new StealthJet(model, speed, range, price);
+					getFleet().add(j);
+				}
+			}
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+		return getFleet();
+	}
+
+	public List<Jet> getFleet() {
+		return fleet;
+	}
+
+	public void setFleet() {
+		this.fleet = fleet;
+	}
+
+	public void remove(int removeJet) {
+	this.fleet.remove(removeJet);
+		
+	}
+	
 }

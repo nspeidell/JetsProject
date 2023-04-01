@@ -1,3 +1,5 @@
-PassengerJet,Delta,10,20,30
-Fighter,F18 Hornet,100000000,10,25
-Cargo Jet,Airbus 380,5,10,15
+PassengerJet,Boeing 777,500,4000,200000000
+Fighter,F18 Hornet,3000,12000,300000000
+StealthJet,F-117,5000,10000,2000000000
+CargoPlane,Airbus A380,500,4000,150000000
+PrivateJet,G5,600,5400,5000000
