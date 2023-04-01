@@ -15,9 +15,9 @@ public class JetsApplication {
 		JetsApplication ja = new JetsApplication();
 		ja.launch();
 	}
+	private Scanner kb = new Scanner(System.in);
 
 	private void launch() {
-		Scanner kb = new Scanner(System.in);
 		AirField af = new AirField();
 		String fileName = "jets.txt";
 		af.readJets(fileName);
@@ -45,13 +45,7 @@ public class JetsApplication {
 			} else if (menuSelection == 7) {
 				addJet(af);
 			} else if (menuSelection == 8) {
-			List<Jet> displayFleet = af.getFleet();
-				for (int i = 0; i > af.getFleet().size(); i++)
-					System.out.println(displayFleet);
-				System.out.println("Select 1 to 5 to remove a jet");
-				int removeJet = kb.nextInt();
-				af.remove(removeJet);
-				System.out.println(af.getFleet());
+				removeJet(af);
 			} else if (menuSelection == 9) {
 				System.out.println("You have chosen to quit, goodbye!");
 				menuLoop = false;
@@ -73,18 +67,17 @@ public class JetsApplication {
 	}
 
 	private void addJet(AirField af) {
-		Scanner kb = new Scanner(System.in);
-		System.out.println("Enter  new jet");
-		System.out.println("model?");
-		String model = kb.next();
-		System.out.println("speed");
-		double speed = kb.nextDouble();
-		System.out.println("range");
-		int range = kb.nextInt();
-		System.out.println("price");
-		long price = kb.nextLong();
-		Jet addingJet = new CargoPlane(model, speed, range, price);
-		af.getFleet().add(addingJet);
+			System.out.println("Enter  new jet");
+			System.out.println("model?");
+			String model = kb.next();
+			System.out.println("speed");
+			double speed = kb.nextDouble();
+			System.out.println("range");
+			int range = kb.nextInt();
+			System.out.println("price");
+			long price = kb.nextLong();
+			Jet addingJet = new CargoPlane(model, speed, range, price);
+			af.getFleet().add(addingJet);
 	}
 
 	private void fastestJet(AirField af) {
@@ -105,5 +98,17 @@ public class JetsApplication {
 			}
 		}
 		System.out.println("The longest range jet in the fleet is: " + "\n" + longestJet);
+	}
+	private void removeJet(AirField af) {
+		List<Jet> displayFleet = af.getFleet();
+		System.out.println("Select the number for the jet you want to be removed;");
+		for (int i = 0; i < displayFleet.size(); i++) {
+			Jet jet = displayFleet.get(i);
+			System.out.println("Selection " + i + ": " + jet);
+		}
+		System.out.println("Selection:");
+		int removeJet = kb.nextInt();
+		af.remove(removeJet);
+		
 	}
 }
